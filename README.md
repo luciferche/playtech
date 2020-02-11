@@ -46,13 +46,18 @@ The code should be well structured, commented, have error handling and be tested
 
 
 ## Solution
-Ideally I would introduce another class to be wrapper for actual items in cart and separate
-it logically from Product class. Product should be able to have his price updated.
-I would also add Shop class which would define the products and price list 
-for the shop and initialize the discounts, init new baskets and pass available discounts to them
+[UPDATED]
 
-This is much simplified version where user gets a basket assigned to him,
-items are added based on name from the user input.
+Introduced wrapper class for the shop containing product list and method for updating  the product  price
+Passing reference to the store object when creating the basket and applying discounts
+----
+~~Ideally I would introduce another class to be wrapper for actual items in cart and separate
+  it logically from Product class. Product should be able to have his price updated.
+  I would also add Shop class which would define the products and price list 
+  for the shop and initialize the discounts, init new baskets and pass available discounts to them~~
+  
+User gets basket assigned to him with a reference to the product list.
+Products are added based on name from the user input.
 Total sum of item prices is calculated and then all the discounts are applied **if** 
 they are applicable to the basket. 
 _Basket_ allows only inserts of items, calculating the price, adding possible discounts

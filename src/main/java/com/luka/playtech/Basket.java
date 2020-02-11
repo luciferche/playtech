@@ -17,8 +17,8 @@ public class Basket {
     static {
         productsInStore.put("Apple", new Product("Apples", "1.00"));
         productsInStore.put("Soup", new Product("Soup", "0.65"));
-        productsInStore.put("Milk", new Product("Milk", "1.3"));
-        productsInStore.put("Bread", new Product("Bread",  "0.8"));
+        productsInStore.put("Milk", new Product("Milk", "1.30"));
+        productsInStore.put("Bread", new Product("Bread",  "0.80"));
 
     }
 

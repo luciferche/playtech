@@ -32,7 +32,7 @@ public class TestShop {
     }
 
     @Test
-    public void testAppleDiscounnt() {
+    public void testAppleDiscount() {
         System.out.println("test apple discount");
         basket.addItem("Apple");
         basket.addItem("Soup");
@@ -42,6 +42,20 @@ public class TestShop {
         Assert.assertTrue(basket.getSubtotal().equals(new BigDecimal("2.95")));
         Assert.assertTrue(basket.getDiscountSum().equals(new BigDecimal("0.10")));
         Assert.assertTrue(basket.getTotal().equals(new BigDecimal("2.85")));
+    }
+
+    @Test
+    public void testHalfBreadForTwoSoupsDiscount() {
+        System.out.println("test 1/2 bread for 2 soups discount");
+        basket.addItem("Milk");
+        basket.addItem("Soup");
+        basket.addItem("Soup");
+        basket.addItem("Bread");
+        basket.calculatePrice();
+
+        Assert.assertTrue(basket.getSubtotal().equals(new BigDecimal("3.40")));
+        Assert.assertTrue(basket.getDiscountSum().equals(new BigDecimal("0.40")));
+        Assert.assertTrue(basket.getTotal().equals(new BigDecimal("3.00")));
     }
 
 

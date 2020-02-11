@@ -27,7 +27,7 @@ public class ShopRunner {
 
                 String[] items = message.replace(BASKET_START_DELIMITER, "").trim().split(EMPTY_STRING);
 
-                Basket basket = new Basket();
+                Basket basket = new Basket(Shop.productsInStore);
                 basket.addAvailableDiscount(new Apple10PercentOff());
                 basket.addAvailableDiscount(new HalfBreadForTwoTinSoups());
 

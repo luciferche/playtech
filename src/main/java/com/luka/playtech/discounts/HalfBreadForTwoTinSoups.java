@@ -27,8 +27,8 @@ public class HalfBreadForTwoTinSoups implements Discount {
      */
     @Override
     public boolean isApplicable(Map<Product, Integer> basket, Map<String, Product> store) {
-        Product soup = Basket.productsInStore.get("Soup");
-        Product bread = Basket.productsInStore.get("Bread");
+        Product soup = store.get("Soup");
+        Product bread = store.get("Bread");
         if(basket.getOrDefault(soup,0) >= 2) {
             if(basket.get(bread) != null) {
                 return true;

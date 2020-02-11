@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 
 public class TestShop {
 
@@ -15,7 +16,7 @@ public class TestShop {
 
     @Before
     public void setup() {
-        basket = new Basket();
+        basket = new Basket(Shop.productsInStore);
         basket.addAvailableDiscount(new Apple10PercentOff());
         basket.addAvailableDiscount(new HalfBreadForTwoTinSoups());
     }

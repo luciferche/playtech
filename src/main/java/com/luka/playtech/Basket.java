@@ -4,38 +4,29 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Basket {
 
-    /*
-        static map used to store products available in the store
-        This shouldn't stay here as it is not related to the basket but the shop
-     */
-    public static HashMap<String,Product> productsInStore = new HashMap<>();
-
-    //filling in initial products with prices in the store
-    static {
-        productsInStore.put("Apple", new Product("Apple", "1.00"));
-        productsInStore.put("Soup", new Product("Soup", "0.65"));
-        productsInStore.put("Milk", new Product("Milk", "1.30"));
-        productsInStore.put("Bread", new Product("Bread",  "0.80"));
-
-    }
 
 
-    private HashMap<Product, Integer> basket;            //items placed in the basket, key=product value=count
+
+    private Map<Product, Integer> basket;            //items placed in the basket, key=product value=count
     private List<Discount> discounts;                   //list of discounts available
     private BigDecimal subtotal;                            //subtotal of items before discount
     private BigDecimal discountSum;                         //sum of discounts
     private BigDecimal total;                               // total price for the basket after discounts
 
+    private Map<String, Product> store;
 
-    public Basket() {
+    public Basket(Map<String, Product> store) {
         this.basket = new HashMap<>();
         this.discounts = new ArrayList<>();
         this.subtotal = new BigDecimal("0");
         this.total = new BigDecimal("0");
         this.discountSum = new BigDecimal("0");
+
+        this.store = store;
     }
 
     /**
@@ -44,7 +35,7 @@ public class Basket {
      * @throws IllegalArgumentException when product with that name hasn't been found in the shop
      */
     public void addItem(String productName) throws IllegalArgumentException{
-        Product product = productsInStore.get(productName);
+        Product product = store.get(productName);
         if(product == null) {
             throw new IllegalArgumentException("Cannot find product specified");
         }
@@ -57,7 +48,7 @@ public class Basket {
      */
     private void addItem(Product product) {
 
-        System.out.println("add  product " + product.getName());
+//        System.out.println("add  product " + product.getName());
         int count = basket.getOrDefault(product, 0);
         count++;
         basket.put(product,count);
@@ -93,8 +84,8 @@ public class Basket {
     private void processDiscounts() {
         this.discountSum = discounts
                 .stream()
-                .filter(discount -> discount.isApplicable(basket, productsInStore))
-                .map(discount -> discount.applyDiscount(basket, productsInStore))
+                .filter(discount -> discount.isApplicable(basket, store))
+                .map(discount -> discount.applyDiscount(basket, store))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
     }

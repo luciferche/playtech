@@ -43,3 +43,26 @@ The code and design should meet these requirements, but be sufficiently flexible
 future changes to the product list and/or discounts applied.
 
 The code should be well structured, commented, have error handling and be tested.
+
+
+## Solution
+The application resides in `com.luka.playtech` package:
+
+**Basket** class that represents shopping cart, 
+
+**Discount** Inetrface used to define behaviour for discounts
+
+**Product** - wrapper class for product item containing product name and price
+
+**ShopRunner** - class used to run the app as a user, it accepts user input on the command line
+in the form of 
+
+`PriceBasket item1 item2 item3`
+
+**discounts/Apple10PercentOff** - Class implementing discount on apples
+
+**discounts/HalfBreadTwoTinSoups** - Class implementing discount based on soups
+
+
+test modules consists of one test class
+**TestShop** - tests for the Basket class and interfaces 

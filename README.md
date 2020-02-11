@@ -46,23 +46,44 @@ The code should be well structured, commented, have error handling and be tested
 
 
 ## Solution
+Ideally I would introduce another class to be wrapper for actual items in cart and separate
+it logically from Product class. Product should be able to have his price updated.
+I would also add Shop class which would define the products and price list 
+for the shop and initialize the discounts, init new baskets and pass available discounts to them
+
+This is much simplified version where user gets a basket assigned to him,
+items are added based on name from the user input.
+Total sum of item prices is calculated and then all the discounts are applied **if** 
+they are applicable to the basket. 
+_Basket_ allows only inserts of items, calculating the price, adding possible discounts
+and getting subtotal, discount amount and total amount.
+
+Used BigDecimal because precision issues with float and double in Java
+If new Discounts are needed they can be added by creating new class that implements Discount interface
+Alternatively Discount counld be replaced with FunctionalInterface and then create 
+specific discounts as lambda functions.
+
 The application resides in `com.luka.playtech` package:
 
-**Basket** class that represents shopping cart, 
 
-**Discount** Inetrface used to define behaviour for discounts
+**Main module:**
 
-**Product** - wrapper class for product item containing product name and price
+_Basket_ class that represents shopping cart, 
 
-**ShopRunner** - class used to run the app as a user, it accepts user input on the command line
+_Discount_ Interface used to define behaviour for discounts
+
+_Product_ - wrapper class for product item containing product name and price
+
+_ShopRunner_ - class used to run the app as a user, it accepts user input on the command line
 in the form of 
 
 `PriceBasket item1 item2 item3`
 
-**discounts/Apple10PercentOff** - Class implementing discount on apples
+_discounts/Apple10PercentOff_ - Class implementing discount on apples
 
-**discounts/HalfBreadTwoTinSoups** - Class implementing discount based on soups
+_discounts/HalfBreadTwoTinSoups_ - Class implementing discount based on soups
 
 
-test modules consists of one test class
-**TestShop** - tests for the Basket class and interfaces 
+**Test module:**
+
+_TestShop_ - tests for the Basket class and interfaces 

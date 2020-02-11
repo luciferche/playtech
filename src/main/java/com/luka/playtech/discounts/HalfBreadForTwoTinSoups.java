@@ -17,6 +17,13 @@ public class HalfBreadForTwoTinSoups implements Discount {
         this.name = "Half bread for 2 tin soups";
     }
 
+
+    /**
+     * implementation of {@link Discount#isApplicable isApplicable }
+     * @param basket HashMap of products and their counts in the basket
+     * @return true if this discount can be applied to the basket ->
+     * if basket contains 2 or more soups
+     */
     @Override
     public boolean isApplicable(HashMap<Product, Integer> basket) {
         Product soup = Basket.productsInStore.get("Soup");
@@ -30,11 +37,14 @@ public class HalfBreadForTwoTinSoups implements Discount {
     }
 
     /**
-     * 10 s - 5 b
-     * @param basket
+     *
+     * Applies the discount by calculating number of soup tins and if there are 2 or more
+     * I apply discount as many times as there are packs of tins
+     * if the overall discount for the soup is bigger than the price of the bread in the basket
+     * price of bread is returned as maximum discount
+     * @param basket HashMap of products and their counts in the basket
      * @return
      */
-
     @Override
     public BigDecimal applyDiscount(HashMap<Product, Integer> basket) {
 

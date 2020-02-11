@@ -43,6 +43,13 @@ public class Apple10PercentOff implements Discount {
         return false;
     }
 
+
+    /**
+     *
+     * Applies the discount by calculating @Link #DISCOUNT_PERCENT DISCOUNT_PERCENT to the price of the apples
+     * @param basket HashMap of products and their counts in the basket
+     * @return
+     */
     @Override
     public BigDecimal applyDiscount(HashMap<Product,Integer> basket) {
         Product apple = Basket.productsInStore.get("Apple");

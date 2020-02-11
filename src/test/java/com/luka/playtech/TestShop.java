@@ -45,7 +45,7 @@ public class TestShop {
     }
 
     @Test
-    public void testHalfBreadForTwoSoupsDiscount() {
+    public void testHalfBreadDiscount() {
         System.out.println("test 1/2 bread for 2 soups discount");
         basket.addItem("Milk");
         basket.addItem("Soup");
@@ -59,8 +59,8 @@ public class TestShop {
     }
 
     @Test
-    public void testHalfBreadForTwoSoupsDiscount_withoutBread() {
-        System.out.println("test 1/2 bread for 2 soups discount");
+    public void testHalfBreadDiscount_withoutBread() {
+        System.out.println("test 1/2 bread for 2 soups discount without bread in the basket");
         basket.addItem("Milk");
         basket.addItem("Soup");
         basket.addItem("Soup");
@@ -69,6 +69,23 @@ public class TestShop {
         Assert.assertTrue(basket.getSubtotal().equals(new BigDecimal("2.60")));
         Assert.assertTrue(basket.getDiscountSum().equals(BigDecimal.ZERO));
         Assert.assertTrue(basket.getTotal().equals(new BigDecimal("2.60")));
+    }
+
+    @Test
+    public void testHalfBreadDiscount_tooManySoups() {
+        System.out.println("test 1/2 bread for 2 soups discount when there are too many soups for all the bread");
+        basket.addItem("Soup");
+        basket.addItem("Soup");
+        basket.addItem("Soup");
+        basket.addItem("Soup");
+        basket.addItem("Soup");
+        basket.addItem("Soup");
+        basket.addItem("Bread");
+        basket.calculatePrice();
+
+        Assert.assertTrue(basket.getSubtotal().equals(new BigDecimal("4.70")));
+        Assert.assertTrue(basket.getDiscountSum().equals(new BigDecimal("0.80")));
+        Assert.assertTrue(basket.getTotal().equals(new BigDecimal("3.90")));
     }
 
     @Test

@@ -1,5 +1,6 @@
 package com.luka.playtech;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 
@@ -11,20 +12,20 @@ import java.util.Objects;
  */
 public class Product {
 
-    private double price;
+    private BigDecimal price;
     private String name;
 
     public Product(String name) {
         this.name = name;
-        this.price = 0;
+        this.price = new BigDecimal("0");
     }
 
-    public Product(String name, double price) {
+    public Product(String name, String price) {
         this.name = name;
-        this.price = price;
+        this.price = new BigDecimal(price);
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 

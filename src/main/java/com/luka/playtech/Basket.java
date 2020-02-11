@@ -1,5 +1,6 @@
 package com.luka.playtech;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,26 +15,27 @@ public class Basket {
 
     //filling in initial products with prices in the store
     static {
-        productsInStore.put("Apple", new Product("Apples", 1.00));
-        productsInStore.put("Soup", new Product("Soup", 0.65));
-        productsInStore.put("Milk", new Product("Milk", 1.3));
-        productsInStore.put("Bread", new Product("Bread",  0.8));
+        productsInStore.put("Apple", new Product("Apples", "1.00"));
+        productsInStore.put("Soup", new Product("Soup", "0.65"));
+        productsInStore.put("Milk", new Product("Milk", "1.3"));
+        productsInStore.put("Bread", new Product("Bread",  "0.8"));
 
     }
 
 
     public HashMap<Product, Integer> basket;            //items placed in the basket, key=product value=count
     private List<Discount> discounts;                   //list of discounts available
-    private double subtotal;                            //subtotal of items before discount
-    private double discountSum;                         //sum of discounts
-    private double total;                               // total price for the basket after discounts
+    private BigDecimal subtotal;                            //subtotal of items before discount
+    private BigDecimal discountSum;                         //sum of discounts
+    private BigDecimal total;                               // total price for the basket after discounts
 
 
     public Basket() {
         this.basket = new HashMap<>();
         this.discounts = new ArrayList<>();
-        this.subtotal = 0;
-        this.total = 0;
+        this.subtotal = new BigDecimal("0");
+        this.total = new BigDecimal("0");
+        this.discountSum = new BigDecimal("0");
     }
 
     /**
@@ -56,7 +58,7 @@ public class Basket {
     private void addItem(Product product) {
 
         System.out.println("add  product " + product.getName());
-        int count = basket.getOrDefault(product,0);
+        int count = basket.getOrDefault(product, 0);
         count++;
         basket.put(product,count);
     }
@@ -65,11 +67,10 @@ public class Basket {
      * Main method to calculate final price and process discounts
      */
     public void calculatePrice() {
-
         this.subtotal = basket.keySet()
                 .stream()
-                .mapToDouble(product -> product.getPrice() * basket.get(product))
-                .sum();
+                .map(product -> product.getPrice().multiply(new BigDecimal(basket.get(product))))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         this.total = this.subtotal;
         System.out.println("Subtotal: \t\t " + this.subtotal);
@@ -77,8 +78,8 @@ public class Basket {
         processDiscounts();
 
         //subtracting the discount from the total
-        if(this.discountSum > 0) {
-            this.total -= this.discountSum;
+        if(this.discountSum.compareTo(BigDecimal.ZERO) > 0) {
+            this.total = this.total.subtract(this.discountSum);
         }
 
         System.out.println("---------------------------------------------");
@@ -93,19 +94,20 @@ public class Basket {
         this.discountSum = discounts
                 .stream()
                 .filter(discount -> discount.isApplicable(basket))
-                .mapToDouble(discount -> discount.applyDiscount(basket))
-                .sum();
+                .map(discount -> discount.applyDiscount(basket))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
     }
 
-    public double getSubtotal() {
+    public BigDecimal getSubtotal() {
         return subtotal;
     }
 
-    public double getDiscountSum() {
+    public BigDecimal getDiscountSum() {
         return discountSum;
     }
 
-    public double getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 

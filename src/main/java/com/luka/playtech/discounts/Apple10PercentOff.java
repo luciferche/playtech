@@ -4,11 +4,13 @@ import com.luka.playtech.Basket;
 import com.luka.playtech.Discount;
 import com.luka.playtech.Product;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 
 public class Apple10PercentOff implements Discount {
     //discount % to be applied to apples
-    private static final double DISCOUNT = 10;
+    private static final BigDecimal DISCOUNT_PERCENT = new BigDecimal("10").divide(new BigDecimal("100"));
 
     //discount name
     private String name;
@@ -42,15 +44,15 @@ public class Apple10PercentOff implements Discount {
     }
 
     @Override
-    public double applyDiscount(HashMap<Product,Integer> basket) {
+    public BigDecimal applyDiscount(HashMap<Product,Integer> basket) {
         Product apple = Basket.productsInStore.get("Apple");
 
         if(basket.containsKey(apple)) {
-            double discount = basket.get(apple) * apple.getPrice() * DISCOUNT / 100;
+            BigDecimal discount = new BigDecimal(basket.get(apple)).multiply(apple.getPrice()).multiply(DISCOUNT_PERCENT);
             System.out.println(this.name + Discount.parsePriceNumber(discount));
-            return discount;
+            return discount.setScale(2, RoundingMode.HALF_UP);
         } else {
-            return 0;
+            return BigDecimal.ZERO;
         }
 
     }

@@ -3,13 +3,14 @@ package com.luka.playtech.discounts;
 import com.luka.playtech.Discount;
 import com.luka.playtech.Product;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 public class HalfBreadForTwoTinSoups implements Discount {
     @Override
-    public double applyDiscount(HashMap<Product, Integer> basket) {
+    public BigDecimal applyDiscount(HashMap<Product, Integer> basket) {
 
-        return 0d;
+        return BigDecimal.ZERO;
     }
 
     @Override

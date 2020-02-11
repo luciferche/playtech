@@ -7,6 +7,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 public class TestShop {
 
     private Basket basket;
@@ -24,9 +26,9 @@ public class TestShop {
         basket.addItem("Soup");
         basket.addItem("Milk");
         basket.calculatePrice();
-        Assert.assertTrue(basket.getSubtotal() == 2.95);
-        Assert.assertTrue(basket.getDiscountSum() == 0);
-        Assert.assertTrue(basket.getTotal() == 2.85);
+        Assert.assertTrue(basket.getSubtotal().equals(new BigDecimal("1.95")));
+        Assert.assertTrue(basket.getDiscountSum().equals(BigDecimal.ZERO));
+        Assert.assertTrue(basket.getTotal().equals(new BigDecimal("1.95")));
     }
 
     @Test
@@ -36,9 +38,10 @@ public class TestShop {
         basket.addItem("Soup");
         basket.addItem("Milk");
         basket.calculatePrice();
-        Assert.assertTrue(basket.getSubtotal() == 2.95);
-        Assert.assertTrue(basket.getDiscountSum() == 0.1);
-        Assert.assertTrue(basket.getTotal() == 2.85);
+
+        Assert.assertTrue(basket.getSubtotal().equals(new BigDecimal("2.95")));
+        Assert.assertTrue(basket.getDiscountSum().equals(new BigDecimal("0.10")));
+        Assert.assertTrue(basket.getTotal().equals(new BigDecimal("2.85")));
     }
 
 

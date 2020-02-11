@@ -1,5 +1,7 @@
 package com.luka.playtech;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 
 public interface Discount {
@@ -11,13 +13,11 @@ public interface Discount {
      * @param price
      * @return
      */
-    static String parsePriceNumber(double price) {
-        String doubleAsString = String.valueOf(price);
-        if(price > 0) {
-            return "£" + doubleAsString;
+    static String parsePriceNumber(BigDecimal price) {
+        if(price.compareTo(BigDecimal.ONE) > 0) {
+            return "£" + price.setScale(2, RoundingMode.HALF_UP);
         } else {
-            int indexOfDecimal = doubleAsString.indexOf(".");
-            return doubleAsString.substring(indexOfDecimal) + "p";
+            return price.remainder( BigDecimal.ONE ).setScale(2, RoundingMode.HALF_UP) + "p";
         }
     }
 
@@ -26,7 +26,7 @@ public interface Discount {
      * @param basket HashMap of products and their counts in the basket
      * @return double value of discounts applied
      */
-    double applyDiscount(HashMap<Product,Integer> basket);
+    BigDecimal applyDiscount(HashMap<Product,Integer> basket);
 
     /**
      * Checks if the discount can be applied to the basket

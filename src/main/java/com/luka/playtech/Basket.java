@@ -71,6 +71,8 @@ public class Basket {
         //subtracting the discount from the total if it is bigger than 0
         if(this.discountSum.compareTo(BigDecimal.ZERO) > 0) {
             this.total = this.total.subtract(this.discountSum);
+        } else {
+            System.out.println("(No offers available)");
         }
 
         System.out.println("---------------------------------------------");

@@ -23,7 +23,8 @@ public class TestShop {
 
     @Test
     public void testAddingToBasket() {
-        System.out.println("test adding elements");
+        System.out.println("--------- test adding elements ---------");
+
         basket.addItem("Soup");
         basket.addItem("Milk");
         basket.calculatePrice();
@@ -34,6 +35,8 @@ public class TestShop {
 
     @Test
     public void testAppleDiscount() {
+        System.out.println("--------- test apple discount ---------");
+
         System.out.println("test apple discount");
         basket.addItem("Apple");
         basket.addItem("Soup");
@@ -47,7 +50,7 @@ public class TestShop {
 
     @Test
     public void testHalfBreadDiscount() {
-        System.out.println("test 1/2 bread for 2 soups discount");
+        System.out.println("--------- test 1/2 bread for 2 soups discount ---------");
         basket.addItem("Milk");
         basket.addItem("Soup");
         basket.addItem("Soup");
@@ -61,7 +64,7 @@ public class TestShop {
 
     @Test
     public void testHalfBreadDiscount_withoutBread() {
-        System.out.println("test 1/2 bread for 2 soups discount without bread in the basket");
+        System.out.println("--------- test 1/2 bread for 2 soups discount without bread in the basket ---------");
         basket.addItem("Milk");
         basket.addItem("Soup");
         basket.addItem("Soup");
@@ -74,7 +77,7 @@ public class TestShop {
 
     @Test
     public void testHalfBreadDiscount_tooManySoups() {
-        System.out.println("test 1/2 bread for 2 soups discount when there are too many soups for all the bread");
+        System.out.println("--------- test 1/2 bread for 2 soups discount when there are too many soups for all the bread ---------");
         basket.addItem("Soup");
         basket.addItem("Soup");
         basket.addItem("Soup");
@@ -91,7 +94,7 @@ public class TestShop {
 
     @Test
     public void testBothDiscounts() {
-        System.out.println("test both discounts");
+        System.out.println("--------- test both discounts ---------");
         basket.addItem("Apple");
         basket.addItem("Soup");
         basket.addItem("Soup");
@@ -106,7 +109,7 @@ public class TestShop {
 
     @Test(expected = IllegalArgumentException.class)
     public void testNonExistingElements() {
-        System.out.println("test adding elements");
+        System.out.println("--------- test adding elements ---------");
         basket.addItem("Apples");
 
         basket.calculatePrice();

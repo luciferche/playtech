@@ -8,9 +8,6 @@ import java.util.Map;
 
 public class Basket {
 
-
-
-
     private Map<Product, Integer> basket;            //items placed in the basket, key=product value=count
     private List<Discount> discounts;                   //list of discounts available
     private BigDecimal subtotal;                            //subtotal of items before discount
@@ -77,6 +74,7 @@ public class Basket {
 
         System.out.println("---------------------------------------------");
         System.out.println("Total: \t\t " + this.total);
+        System.out.println("---------------------------------------------");
 
     }
 

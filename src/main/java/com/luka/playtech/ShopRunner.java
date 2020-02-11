@@ -13,7 +13,6 @@ public class ShopRunner {
 //    private static final String MESSAGE_END_DELIMITER = "";
 
     public static void main(String[] args) {
-        StringBuilder sb = new StringBuilder();
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("----------------------------------------------------");

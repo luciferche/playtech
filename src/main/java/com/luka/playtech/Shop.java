@@ -1,13 +1,14 @@
 package com.luka.playtech;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Shop {
     /*
        static map used to store products available in the store
        This shouldn't stay here as it is not related to the basket but the shop
     */
-    public static HashMap<String,Product> productsInStore = new HashMap<>();
+    public static Map<String,Product> productsInStore = new HashMap<>();
 
     //filling in initial products with prices in the store
     static {

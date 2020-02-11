@@ -23,7 +23,7 @@ public class Basket {
     }
 
 
-    public HashMap<Product, Integer> basket;            //items placed in the basket, key=product value=count
+    private HashMap<Product, Integer> basket;            //items placed in the basket, key=product value=count
     private List<Discount> discounts;                   //list of discounts available
     private BigDecimal subtotal;                            //subtotal of items before discount
     private BigDecimal discountSum;                         //sum of discounts
@@ -77,7 +77,7 @@ public class Basket {
 
         processDiscounts();
 
-        //subtracting the discount from the total
+        //subtracting the discount from the total if it is bigger than 0
         if(this.discountSum.compareTo(BigDecimal.ZERO) > 0) {
             this.total = this.total.subtract(this.discountSum);
         }

@@ -58,6 +58,33 @@ public class TestShop {
         Assert.assertTrue(basket.getTotal().equals(new BigDecimal("3.00")));
     }
 
+    @Test
+    public void testHalfBreadForTwoSoupsDiscount_withoutBread() {
+        System.out.println("test 1/2 bread for 2 soups discount");
+        basket.addItem("Milk");
+        basket.addItem("Soup");
+        basket.addItem("Soup");
+        basket.calculatePrice();
+
+        Assert.assertTrue(basket.getSubtotal().equals(new BigDecimal("2.60")));
+        Assert.assertTrue(basket.getDiscountSum().equals(BigDecimal.ZERO));
+        Assert.assertTrue(basket.getTotal().equals(new BigDecimal("2.60")));
+    }
+
+    @Test
+    public void testBothDiscounts() {
+        System.out.println("test both discounts");
+        basket.addItem("Apple");
+        basket.addItem("Soup");
+        basket.addItem("Soup");
+        basket.addItem("Bread");
+        basket.calculatePrice();
+
+        Assert.assertTrue(basket.getSubtotal().equals(new BigDecimal("3.10")));
+        Assert.assertTrue(basket.getDiscountSum().equals(new BigDecimal("0.50")));
+        Assert.assertTrue(basket.getTotal().equals(new BigDecimal("2.60")));
+    }
+
 
     @Test(expected = IllegalArgumentException.class)
     public void testNonExistingElements() {

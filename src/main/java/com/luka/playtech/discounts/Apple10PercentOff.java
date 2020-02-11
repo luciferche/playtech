@@ -7,6 +7,7 @@ import com.luka.playtech.Product;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Apple10PercentOff implements Discount {
     //discount % to be applied to apples
@@ -32,11 +33,12 @@ public class Apple10PercentOff implements Discount {
     /**
      * implementation of {@link Discount#isApplicable isApplicable }
      * @param basket HashMap of products and their counts in the basket
+     * @param store products in store
      * @return true if this discount can be applied to the basket
      */
     @Override
-    public boolean isApplicable(HashMap<Product, Integer> basket) {
-        Product apple = Basket.productsInStore.get("Apple");
+    public boolean isApplicable(Map<Product, Integer> basket, Map<String, Product> store) {
+        Product apple = store.get("Apple");
         if(basket.containsKey(apple)) {
             return true;
         }
@@ -48,11 +50,12 @@ public class Apple10PercentOff implements Discount {
      *
      * Applies the discount by calculating @Link #DISCOUNT_PERCENT DISCOUNT_PERCENT to the price of the apples
      * @param basket HashMap of products and their counts in the basket
+     * @param store products in store
      * @return
      */
     @Override
-    public BigDecimal applyDiscount(HashMap<Product,Integer> basket) {
-        Product apple = Basket.productsInStore.get("Apple");
+    public BigDecimal applyDiscount(Map<Product,Integer> basket, Map<String, Product> store) {
+        Product apple = store.get("Apple");
 
         if(basket.containsKey(apple)) {
             BigDecimal discount = new BigDecimal(basket.get(apple)).multiply(apple.getPrice()).multiply(DISCOUNT_PERCENT);

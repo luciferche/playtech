@@ -15,7 +15,7 @@ public class Basket {
 
     //filling in initial products with prices in the store
     static {
-        productsInStore.put("Apple", new Product("Apples", "1.00"));
+        productsInStore.put("Apple", new Product("Apple", "1.00"));
         productsInStore.put("Soup", new Product("Soup", "0.65"));
         productsInStore.put("Milk", new Product("Milk", "1.30"));
         productsInStore.put("Bread", new Product("Bread",  "0.80"));
@@ -93,8 +93,8 @@ public class Basket {
     private void processDiscounts() {
         this.discountSum = discounts
                 .stream()
-                .filter(discount -> discount.isApplicable(basket))
-                .map(discount -> discount.applyDiscount(basket))
+                .filter(discount -> discount.isApplicable(basket, productsInStore))
+                .map(discount -> discount.applyDiscount(basket, productsInStore))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
     }

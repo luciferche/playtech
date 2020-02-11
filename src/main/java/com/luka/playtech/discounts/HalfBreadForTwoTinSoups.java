@@ -6,7 +6,7 @@ import com.luka.playtech.Product;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.HashMap;
+import java.util.Map;
 
 public class HalfBreadForTwoTinSoups implements Discount {
 
@@ -21,11 +21,12 @@ public class HalfBreadForTwoTinSoups implements Discount {
     /**
      * implementation of {@link Discount#isApplicable isApplicable }
      * @param basket HashMap of products and their counts in the basket
+     * @param store products in store
      * @return true if this discount can be applied to the basket ->
      * if basket contains 2 or more soups
      */
     @Override
-    public boolean isApplicable(HashMap<Product, Integer> basket) {
+    public boolean isApplicable(Map<Product, Integer> basket, Map<String, Product> store) {
         Product soup = Basket.productsInStore.get("Soup");
         Product bread = Basket.productsInStore.get("Bread");
         if(basket.getOrDefault(soup,0) >= 2) {
@@ -46,10 +47,10 @@ public class HalfBreadForTwoTinSoups implements Discount {
      * @return
      */
     @Override
-    public BigDecimal applyDiscount(HashMap<Product, Integer> basket) {
+    public BigDecimal applyDiscount(Map<Product, Integer> basket, Map<String, Product> store) {
 
-        Product soup = Basket.productsInStore.get("Soup");
-        Product bread = Basket.productsInStore.get("Bread");
+        Product soup = store.get("Soup");
+        Product bread = store.get("Bread");
         int countSoup = basket.get(soup);
         int countBread = basket.get(bread);
         int timesDiscount = countSoup / 2;

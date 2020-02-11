@@ -2,6 +2,13 @@ package com.luka.playtech;
 
 import java.util.Objects;
 
+
+/**
+ * Class representing a product that can be put in the basket
+ * It is basically a wrapper class for price and name of a product
+ * so it can be managed easier and used as a key in the Map representing the basket
+ * Ideally item in the shopping cart should just have a reference to a product and be a separate object
+ */
 public class Product {
 
     private double price;
